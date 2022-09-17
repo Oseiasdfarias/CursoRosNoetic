@@ -6,6 +6,22 @@
 
 #IncludeRegexTransform: 
 
+/home/bits/workspace/catkin_ws/devel/include/my_project_msgs/CounterHistory.h
+string
+-
+vector
+-
+map
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+
 /home/bits/workspace/catkin_ws/src/my_project_cpp/src/counter.cpp
 ros/ros.h
 /home/bits/workspace/catkin_ws/src/my_project_cpp/src/ros/ros.h
@@ -13,6 +29,8 @@ std_msgs/Float64.h
 /home/bits/workspace/catkin_ws/src/my_project_cpp/src/std_msgs/Float64.h
 std_srvs/Empty.h
 /home/bits/workspace/catkin_ws/src/my_project_cpp/src/std_srvs/Empty.h
+my_project_msgs/CounterHistory.h
+/home/bits/workspace/catkin_ws/src/my_project_cpp/src/my_project_msgs/CounterHistory.h
 
 /opt/ros/noetic/include/ros/advertise_options.h
 ros/forwards.h

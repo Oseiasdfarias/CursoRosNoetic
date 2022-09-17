@@ -68,6 +68,16 @@ install/local/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -90,6 +100,18 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
@@ -100,16 +122,6 @@ test:
 test/fast: test
 
 .PHONY : test/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
 
 # Special rule for the target install
 install: preinstall
@@ -122,18 +134,6 @@ install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -168,36 +168,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-my_project_cpp/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_project_cpp/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-.PHONY : my_project_cpp/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_py: my_project_cpp/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-.PHONY : std_msgs_generate_messages_py
-
-# fast build rule for target.
-std_msgs_generate_messages_py/fast:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f my_project_cpp/CMakeFiles/std_msgs_generate_messages_py.dir/build.make my_project_cpp/CMakeFiles/std_msgs_generate_messages_py.dir/build
-.PHONY : std_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-my_project_cpp/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_project_cpp/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-.PHONY : my_project_cpp/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_nodejs: my_project_cpp/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : std_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-std_msgs_generate_messages_nodejs/fast:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f my_project_cpp/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make my_project_cpp/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
-.PHONY : std_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
 my_project_cpp/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
 	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_project_cpp/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
 .PHONY : my_project_cpp/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
@@ -211,6 +181,21 @@ roscpp_generate_messages_cpp: my_project_cpp/CMakeFiles/roscpp_generate_messages
 roscpp_generate_messages_cpp/fast:
 	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f my_project_cpp/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make my_project_cpp/CMakeFiles/roscpp_generate_messages_cpp.dir/build
 .PHONY : roscpp_generate_messages_cpp/fast
+
+# Convenience name for target.
+my_project_cpp/CMakeFiles/number_publisher.dir/rule:
+	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_project_cpp/CMakeFiles/number_publisher.dir/rule
+.PHONY : my_project_cpp/CMakeFiles/number_publisher.dir/rule
+
+# Convenience name for target.
+number_publisher: my_project_cpp/CMakeFiles/number_publisher.dir/rule
+
+.PHONY : number_publisher
+
+# fast build rule for target.
+number_publisher/fast:
+	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f my_project_cpp/CMakeFiles/number_publisher.dir/build.make my_project_cpp/CMakeFiles/number_publisher.dir/build
+.PHONY : number_publisher/fast
 
 # Convenience name for target.
 my_project_cpp/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
@@ -243,21 +228,6 @@ rosgraph_msgs_generate_messages_nodejs/fast:
 .PHONY : rosgraph_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
-my_project_cpp/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_project_cpp/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-.PHONY : my_project_cpp/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_lisp: my_project_cpp/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : std_msgs_generate_messages_lisp
-
-# fast build rule for target.
-std_msgs_generate_messages_lisp/fast:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f my_project_cpp/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make my_project_cpp/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
-.PHONY : std_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
 my_project_cpp/CMakeFiles/roscpp_generate_messages_py.dir/rule:
 	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_project_cpp/CMakeFiles/roscpp_generate_messages_py.dir/rule
 .PHONY : my_project_cpp/CMakeFiles/roscpp_generate_messages_py.dir/rule
@@ -271,96 +241,6 @@ roscpp_generate_messages_py: my_project_cpp/CMakeFiles/roscpp_generate_messages_
 roscpp_generate_messages_py/fast:
 	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f my_project_cpp/CMakeFiles/roscpp_generate_messages_py.dir/build.make my_project_cpp/CMakeFiles/roscpp_generate_messages_py.dir/build
 .PHONY : roscpp_generate_messages_py/fast
-
-# Convenience name for target.
-my_project_cpp/CMakeFiles/counter.dir/rule:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_project_cpp/CMakeFiles/counter.dir/rule
-.PHONY : my_project_cpp/CMakeFiles/counter.dir/rule
-
-# Convenience name for target.
-counter: my_project_cpp/CMakeFiles/counter.dir/rule
-
-.PHONY : counter
-
-# fast build rule for target.
-counter/fast:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f my_project_cpp/CMakeFiles/counter.dir/build.make my_project_cpp/CMakeFiles/counter.dir/build
-.PHONY : counter/fast
-
-# Convenience name for target.
-my_project_cpp/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_project_cpp/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-.PHONY : my_project_cpp/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_eus: my_project_cpp/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-.PHONY : std_msgs_generate_messages_eus
-
-# fast build rule for target.
-std_msgs_generate_messages_eus/fast:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f my_project_cpp/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make my_project_cpp/CMakeFiles/std_msgs_generate_messages_eus.dir/build
-.PHONY : std_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-my_project_cpp/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_project_cpp/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-.PHONY : my_project_cpp/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_nodejs: my_project_cpp/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-
-.PHONY : roscpp_generate_messages_nodejs
-
-# fast build rule for target.
-roscpp_generate_messages_nodejs/fast:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f my_project_cpp/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make my_project_cpp/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
-.PHONY : roscpp_generate_messages_nodejs/fast
-
-# Convenience name for target.
-my_project_cpp/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_project_cpp/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-.PHONY : my_project_cpp/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_cpp: my_project_cpp/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_cpp
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_cpp/fast:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f my_project_cpp/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make my_project_cpp/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-my_project_cpp/CMakeFiles/number_publisher.dir/rule:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_project_cpp/CMakeFiles/number_publisher.dir/rule
-.PHONY : my_project_cpp/CMakeFiles/number_publisher.dir/rule
-
-# Convenience name for target.
-number_publisher: my_project_cpp/CMakeFiles/number_publisher.dir/rule
-
-.PHONY : number_publisher
-
-# fast build rule for target.
-number_publisher/fast:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f my_project_cpp/CMakeFiles/number_publisher.dir/build.make my_project_cpp/CMakeFiles/number_publisher.dir/build
-.PHONY : number_publisher/fast
-
-# Convenience name for target.
-my_project_cpp/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_project_cpp/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-.PHONY : my_project_cpp/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_cpp: my_project_cpp/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : std_msgs_generate_messages_cpp
-
-# fast build rule for target.
-std_msgs_generate_messages_cpp/fast:
-	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f my_project_cpp/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make my_project_cpp/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
-.PHONY : std_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 my_project_cpp/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
@@ -421,6 +301,51 @@ rosgraph_msgs_generate_messages_py: my_project_cpp/CMakeFiles/rosgraph_msgs_gene
 rosgraph_msgs_generate_messages_py/fast:
 	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f my_project_cpp/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make my_project_cpp/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
 .PHONY : rosgraph_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+my_project_cpp/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
+	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_project_cpp/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+.PHONY : my_project_cpp/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_nodejs: my_project_cpp/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+
+.PHONY : roscpp_generate_messages_nodejs
+
+# fast build rule for target.
+roscpp_generate_messages_nodejs/fast:
+	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f my_project_cpp/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make my_project_cpp/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
+.PHONY : roscpp_generate_messages_nodejs/fast
+
+# Convenience name for target.
+my_project_cpp/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
+	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_project_cpp/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+.PHONY : my_project_cpp/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_cpp: my_project_cpp/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_cpp
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_cpp/fast:
+	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f my_project_cpp/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make my_project_cpp/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+my_project_cpp/CMakeFiles/counter.dir/rule:
+	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_project_cpp/CMakeFiles/counter.dir/rule
+.PHONY : my_project_cpp/CMakeFiles/counter.dir/rule
+
+# Convenience name for target.
+counter: my_project_cpp/CMakeFiles/counter.dir/rule
+
+.PHONY : counter
+
+# fast build rule for target.
+counter/fast:
+	cd /home/bits/workspace/catkin_ws/build && $(MAKE) -f my_project_cpp/CMakeFiles/counter.dir/build.make my_project_cpp/CMakeFiles/counter.dir/build
+.PHONY : counter/fast
 
 src/counter.o: src/counter.cpp.o
 
@@ -483,29 +408,24 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/local"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... test"
-	@echo "... std_msgs_generate_messages_py"
-	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_cpp"
-	@echo "... roscpp_generate_messages_eus"
-	@echo "... rosgraph_msgs_generate_messages_nodejs"
-	@echo "... list_install_components"
-	@echo "... std_msgs_generate_messages_lisp"
-	@echo "... roscpp_generate_messages_py"
-	@echo "... install"
-	@echo "... counter"
-	@echo "... std_msgs_generate_messages_eus"
-	@echo "... roscpp_generate_messages_nodejs"
-	@echo "... rosgraph_msgs_generate_messages_cpp"
 	@echo "... install/strip"
 	@echo "... number_publisher"
-	@echo "... std_msgs_generate_messages_cpp"
+	@echo "... roscpp_generate_messages_eus"
+	@echo "... rosgraph_msgs_generate_messages_nodejs"
+	@echo "... roscpp_generate_messages_py"
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
+	@echo "... test"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_py"
+	@echo "... install"
+	@echo "... roscpp_generate_messages_nodejs"
+	@echo "... rosgraph_msgs_generate_messages_cpp"
+	@echo "... counter"
 	@echo "... src/counter.o"
 	@echo "... src/counter.i"
 	@echo "... src/counter.s"

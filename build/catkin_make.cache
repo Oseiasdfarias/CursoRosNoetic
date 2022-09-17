@@ -1,2 +1,2 @@
-my_project_msgs
--DCATKIN_DEVEL_PREFIX=/home/bits/workspace/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/bits/workspace/catkin_ws/install -DCATKIN_WHITELIST_PACKAGES=my_project_msgs -G Unix Makefiles
+my_project_cpp:my_project_msgs
+-DCATKIN_DEVEL_PREFIX=/home/bits/workspace/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/bits/workspace/catkin_ws/install -DCATKIN_WHITELIST_PACKAGES=my_project_cpp;my_project_msgs -G Unix Makefiles

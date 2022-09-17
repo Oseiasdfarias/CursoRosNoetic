@@ -4,6 +4,7 @@
 // Messagens
 #include "std_msgs/Float64.h"
 #include "std_srvs/Empty.h"
+#include "my_project_msgs/CounterHistory.h"
 
 
 class Counter{
@@ -39,13 +40,19 @@ class Counter{
             nh->deleteParam("pub_rate");
         }
 
+        last_count = count;
+        cycles = 0;
+
         num_sub = nh->subscribe("/number", 10, &Counter::numberCallback, this);
         count_pub = nh->advertise<std_msgs::Float64>("/current_count", 10);
         timer_pub = nh->createTimer(ros::Duration(publish_interval), &Counter::timerCallback, this);
         reset_srv = nh->advertiseService("/reset_counter", &Counter::resetSrvCallback, this);
+        history_pub = nh->advertise<my_project_msgs::CounterHistory>("/history_count", 10);
     }
 
     void numberCallback(const std_msgs::Float64 &msg){
+        cycles ++;
+        last_count = count;
         count = count + msg.data;
         ROS_INFO("Contagem Atual %f", count);
     }
@@ -53,6 +60,12 @@ class Counter{
         std_msgs::Float64 msg;
         msg.data = count;
         count_pub.publish(msg);
+        
+        my_project_msgs::CounterHistory history_msg;
+        history_msg.current_value = count;
+        history_msg.last_value = last_count;
+        history_msg.cycles = cycles;
+        history_pub.publish(history_msg);
     }
 
     bool resetSrvCallback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res){
@@ -64,6 +77,9 @@ class Counter{
     private:
         double count;
         double publish_interval;
+        double last_count;
+        int cycles;
+        ros::Publisher history_pub;
         ros::Subscriber num_sub;
         ros::Publisher count_pub;
         ros::Timer timer_pub;
