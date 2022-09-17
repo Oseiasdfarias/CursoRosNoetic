@@ -1,0 +1,21 @@
+<launch>
+    <arg name="number_topic_py" default="/number" />
+
+    <!--param name="initial_count" type="double" value="-3.1415" /-->
+
+    <!-- Inicializa um tópico -->
+    <node name="counter_py" pkg="my_project_py" type="counter.py" output="screen" >
+        <remap from="/current_count" to="count" />
+        <remap from="/number" to="$(arg number_topic_py)" />
+        <param name="pub_rate" type="double" value="0.1" />
+        <param name="delete_param" type="bool" value="false" />
+    </node>
+
+    <!-- Inicializa um tópico -->
+    <node name="counter_py2" pkg="my_project_py" type="counter.py" output="screen" >
+        <remap from="/current_count" to="count" />
+        <remap from="/number" to="$(arg number_topic_py)" />
+        <param name="pub_rate" type="double" value="0.1" />
+    </node>
+
+</launch>

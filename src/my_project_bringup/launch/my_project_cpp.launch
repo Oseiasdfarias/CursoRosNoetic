@@ -1,0 +1,16 @@
+<launch>
+    <arg name="new_counter" default="True" />
+    <!-- Incluindo um arquivo launch já existente e usando para iniciar nós -->
+    <include file="$(find my_project_bringup)/launch/counter_cpp.launch" >
+        <arg name="number_topic" value="new_number" />
+    </include>
+
+    <!-- Criando um nó a partir dessa launch file -->
+    <node name="num_pub_cpp" pkg="my_project_cpp" type="number_publisher" output="screen" />
+    
+    <!-- Usando o condicional (if) para tomar alguma ação ao iniciar o launch file -->
+    <group if="$(arg new_counter)">    
+        <node name="counter_cpp2" pkg="my_project_cpp" type="counter" output="screen" />
+    </group>
+    
+</launch>
